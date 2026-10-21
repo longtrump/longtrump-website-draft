@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="LTG">
+  <rect width="64" height="64" fill="#0c1725"/>
+  <rect x="4" y="4" width="56" height="56" fill="none" stroke="#e0a184" stroke-width="1" opacity="0.55"/>
+  <text x="10" y="34" font-family="Georgia, 'Times New Roman', serif" font-size="19" fill="#f5efe3" letter-spacing="1">LT</text>
+  <text x="10" y="48" font-family="Georgia, 'Times New Roman', serif" font-size="10" fill="#e0a184" letter-spacing="3">GT</text>
+</svg>
