@@ -18,6 +18,7 @@
   var API = 'https://4j91yv4ms6.execute-api.us-east-1.amazonaws.com/fetch?key=';
   var CONTACT = 'contact.html';
   var busy = false;
+  var pendingScroll = false;
 
   /* Fixed output columns — matches the source page one for one. */
   var COLUMNS = [
@@ -185,8 +186,9 @@
     return rows;
   }
 
-  function search(raw) {
+  function search(raw, reveal) {
     var q = String(raw || '').trim();
+    pendingScroll = reveal || false;
     if (!q) {
       input.focus();
       setStatus(['請先輸入料號，例如 LM358'], 'error');
@@ -214,6 +216,15 @@
         clearTimeout(timer);
         try { renderError(q, err); } finally { setBusy(false); }
       });
+  }
+
+  function revealResults() {
+    if (!pendingScroll) return;
+    var section = document.getElementById('lookup');
+    if (!section) return;
+    var behavior = pendingScroll === 'instant' ? 'auto' : 'smooth';
+    section.scrollIntoView({ behavior: behavior, block: 'start' });
+    pendingScroll = false;
   }
 
   function setStatus(items, kind) {
@@ -255,6 +266,7 @@
 
     resultsEl.appendChild(el('p', 'rl-scrollhint', '共 ' + fmt(rows.length) + ' 筆批號；表格可上下、左右捲動，表頭與料號欄固定'));
     resultsEl.appendChild(buildTable(rows));
+    revealResults();
   }
 
   function buildTable(rows) {
@@ -329,6 +341,7 @@
     box.appendChild(acts);
 
     resultsEl.appendChild(box);
+    revealResults();
   }
 
   function renderError(q, err) {
@@ -350,13 +363,14 @@
     box.appendChild(acts);
 
     resultsEl.appendChild(box);
+    revealResults();
   }
 
   /* ---------- wiring ---------- */
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    search(input.value);
+    search(input.value, true);
   });
 
   input.addEventListener('search', function () {
@@ -369,10 +383,7 @@
   Array.prototype.forEach.call(document.querySelectorAll('.rl-chip[data-q]'), function (chip) {
     chip.addEventListener('click', function () {
       input.value = chip.getAttribute('data-q');
-      search(input.value);
-      if (window.matchMedia('(max-width: 860px)').matches) {
-        document.getElementById('lookup').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      search(input.value, true);
     });
   });
 
@@ -381,7 +392,7 @@
     var seed = decodeURIComponent(m[1].replace(/\+/g, ' '));
     if (seed.trim()) {
       input.value = seed.trim();
-      search(seed);
+      search(seed, 'instant');
     }
   }
 })();
