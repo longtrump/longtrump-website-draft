@@ -37,75 +37,81 @@
 
 <main id="main">
 
-  <section class="page-hero">
+  <section class="page-hero page-hero--image rl-hero-section">
+    <div class="page-hero__media">
+      <img src="images/warehouse.png" alt="倉儲貨架上整齊排列的電子零件紙箱" width="1024" height="572" fetchpriority="high">
+    </div>
     <div class="wrap">
-      <div class="crumbs"><a href="index.html">首頁</a><span>/</span><a href="brands.html">產品線</a><span>/</span><span>Rochester 查詢</span></div>
-      <h1>Rochester 現貨，<br>一個料號一個料號查清楚。</h1>
-      <p>70 家原廠授權、20 萬個料號、15 億顆現貨。輸入料號，直接核對現貨量、批號年份、ECCN 與隆電客製報價。</p>
+      <div class="rl-hero">
+        <div class="rl-hero__copy">
+          <h1>Rochester<br>現貨查詢</h1>
+          <p>70 家原廠授權、20 萬個料號、15 億顆現貨。輸入料號，核對現貨量、批號年份與隆電客製報價。</p>
+          <dl class="rl-hero__facts">
+            <div><dt>15 億+</dt><dd>現貨顆數</dd></div>
+            <div><dt>20 萬+</dt><dd>可查料號</dd></div>
+            <div><dt>70+</dt><dd>授權原廠</dd></div>
+          </dl>
+        </div>
+
+        <div class="rl-hero__search reveal">
+          <form class="rl-form" id="rlForm" role="search">
+            <label class="rl-label" for="rlInput">輸入料號</label>
+            <div class="rl-field">
+              <svg class="rl-field__icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M12.8 12.8 17 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+              <input class="rl-input" id="rlInput" name="q" type="search" inputmode="search"
+                autocomplete="off" autocapitalize="characters" spellcheck="false"
+                placeholder="例如 LM358" aria-describedby="rlHint">
+              <button class="btn rl-submit" type="submit">查詢
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 2.5 12.5 7 8 11.5" stroke="currentColor" stroke-width="1.2"/></svg>
+              </button>
+            </div>
+          </form>
+          <p class="rl-hint" id="rlHint">支援完整料號或前綴，一次最多回傳約 20 個料號；實際交期以業務回覆為準。</p>
+
+          <div class="rl-suggest">
+            <span class="rl-suggest__label">熱門料號</span>
+            <button class="rl-chip" type="button" data-q="LM358">LM358</button>
+            <button class="rl-chip" type="button" data-q="IRF3710PBF">IRF3710PBF</button>
+            <button class="rl-chip" type="button" data-q="SN74AVC2T45YZPR">SN74AVC2T45YZPR</button>
+            <button class="rl-chip" type="button" data-q="CAT24C256WI-GT3">CAT24C256WI-GT3</button>
+            <button class="rl-chip" type="button" data-q="FOD814">FOD814</button>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <section class="section section--paper" id="lookup">
     <div class="wrap">
-      <div class="rl-head reveal">
-        <div>
-          <div class="eyebrow"><span class="num">A</span>Search Engine</div>
-          <h2 class="h-md">料號查詢</h2>
-        </div>
-        <p class="rl-head__note">資料即時來自 Rochester 授權庫存；表內價格為隆電客製報價，已含服務與供應鏈成本，不是 Rochester 原廠牌價。</p>
+      <div class="rl-results-head reveal">
+        <h2 class="h-md">查詢結果</h2>
+        <p>資料即時來自 Rochester 授權庫存；表內價格為隆電客製報價，不是 Rochester 原廠牌價。</p>
       </div>
 
-      <div class="rl-panel reveal" style="--d:80ms">
-        <form class="rl-form" id="rlForm" role="search">
-          <label class="rl-label" for="rlInput">Rochester 料號</label>
-          <div class="rl-field">
-            <svg class="rl-field__icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.4"/>
-              <path d="M12.8 12.8 17 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-            </svg>
-            <input class="rl-input" id="rlInput" name="q" type="search" inputmode="search"
-              autocomplete="off" autocapitalize="characters" spellcheck="false"
-              placeholder="請輸入料號，例如 LM358" aria-describedby="rlHint">
-            <button class="btn rl-submit" type="submit">查詢
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 2.5 12.5 7 8 11.5" stroke="currentColor" stroke-width="1.2"/></svg>
-            </button>
-          </div>
-        </form>
-        <p class="rl-hint" id="rlHint">支援完整料號或前綴，一次最多回傳約 20 個料號；資料為查詢當下，實際交期以業務回覆為準。</p>
+      <div class="rl-status" id="rlStatus" role="status" aria-live="polite"></div>
 
-        <div class="rl-suggest">
-          <span class="rl-suggest__label">熱門料號</span>
-          <button class="rl-chip" type="button" data-q="LM358">LM358</button>
-          <button class="rl-chip" type="button" data-q="IRF3710PBF">IRF3710PBF</button>
-          <button class="rl-chip" type="button" data-q="SN74AVC2T45YZPR">SN74AVC2T45YZPR</button>
-          <button class="rl-chip" type="button" data-q="CAT24C256WI-GT3">CAT24C256WI-GT3</button>
-          <button class="rl-chip" type="button" data-q="FOD814">FOD814</button>
+      <div class="rl-results" id="rlResults" aria-busy="false">
+        <div class="rl-empty">
+          <h3>輸入完整料號，或先用前綴試試</h3>
+          <p>結果會以 16 個欄位呈現：料號、ECCN、RoHS、六段批量價、製造商代碼、Pb Free、總現貨、批號年份、備註與該批數量。每一列是一筆批號，同一料號會出現多列。</p>
+          <ul class="rl-empty__tips">
+            <li><b>前綴查詢</b>：<code>LM358</code> 會列出 22 個料號、82 筆批號。</li>
+            <li><b>完整料號</b>：<code>LM358ADR2G</code> 只留下單一料號。</li>
+            <li><b>查不到時</b>：把型號寄給我們，由業務代查替代料。</li>
+          </ul>
         </div>
-
-        <div class="rl-status" id="rlStatus" role="status" aria-live="polite"></div>
-
-        <div class="rl-results" id="rlResults" aria-busy="false">
-          <div class="rl-empty">
-            <h3>輸入完整料號，或先用前綴試試</h3>
-            <p>結果會以 16 個欄位呈現：料號、ECCN、RoHS、六段批量價、製造商代碼、Pb Free、總現貨、批號年份、備註與該批數量。每一列是一筆批號，同一料號會出現多列。</p>
-            <ul class="rl-empty__tips">
-              <li><span>01</span>前綴查詢：<code>LM358</code> 會列出 22 個料號、82 筆批號。</li>
-              <li><span>02</span>完整料號：<code>LM358ADR2G</code> 只留下單一料號。</li>
-              <li><span>03</span>查不到時：把型號寄給我們，由業務代查替代料。</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="rl-foot">
-          價格為隆電客製報價（USD，未稅），依料號成本與批量區間計算，<strong>不是 Rochester 原廠牌價</strong>；空白表示該批量區間不適用，「Prices: Over」請洽業務。Date Code 顯示年份末兩碼。
-        </p>
       </div>
+
+      <p class="rl-foot">
+        價格為隆電客製報價（USD，未稅），依料號成本與批量區間計算，<strong>不是 Rochester 原廠牌價</strong>；空白表示該批量區間不適用，「Prices: Over」請洽業務。Date Code 顯示年份末兩碼。
+      </p>
     </div>
   </section>
-
   <section class="section section--cream">
     <div class="wrap">
-      <div class="eyebrow reveal"><span class="num">B</span>Featured Products</div>
       <h2 class="h-lg reveal">這個月，原廠在推這些料。</h2>
       <div class="rl-feat">
         <article class="rl-feat__item reveal">
@@ -151,7 +157,6 @@
   <section class="section section--dark">
     <div class="wrap rl-about">
       <div>
-        <div class="eyebrow reveal"><span class="num">C</span>The Semiconductor Lifecycle Solution</div>
         <h2 class="h-lg reveal">原廠停產之後，<br>還有人繼續製造。</h2>
       </div>
       <div class="rl-about__body reveal" style="--d:80ms">
@@ -163,6 +168,22 @@
           <div><dt>20k+</dt><dd>可製造元件</dd></div>
           <div><dt>12B</dt><dd>晶粒庫存</dd></div>
         </dl>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="rl-band">
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="矽晶圓邊緣的虹彩繞射光" style="background-image:url('images/band-wafer.jpg')"></div>
+          <figcaption>晶圓：長生命週期元件的起點</figcaption>
+        </figure>
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="感測器晶片與金色打線微距" style="background-image:url('images/band-die.jpg')"></div>
+          <figcaption>封裝與打線：重新製造的關鍵工序</figcaption>
+        </figure>
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="無線通訊模組電路板微距" style="background-image:url('images/band-module.jpg')"></div>
+          <figcaption>模組：從晶片到系統的最後一哩</figcaption>
+        </figure>
       </div>
     </div>
   </section>

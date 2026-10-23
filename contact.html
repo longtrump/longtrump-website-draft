@@ -37,10 +37,12 @@
 
 <main id="main">
 
-  <section class="page-hero">
+  <section class="page-hero page-hero--image">
+    <div class="page-hero__media">
+      <img src="images/workspace.png" alt="內湖辦公室的實驗桌與量測設備" width="1024" height="572">
+    </div>
     <div class="wrap">
-      <div class="crumbs"><a href="index.html">首頁</a><span>/</span><span>聯絡我們</span></div>
-      <h1>把問題說清楚，<br>我們就開始找答案。</h1>
+      <h1>把問題說清楚，<br>我們來找答案。</h1>
       <p>缺料、替代料、停產料、樣品與技術支援——寄一份需求過來，兩個工作天內給你第一版回覆。</p>
     </div>
   </section>
@@ -48,8 +50,7 @@
   <section class="section section--paper">
     <div class="wrap contact-grid">
 
-      <div class="contact-block">
-        <div class="eyebrow"><span class="num">01</span>台北總部</div>
+      <div class="contact-block reveal">
         <h2 class="h-md">隆電股份有限公司</h2>
         <dl style="display:grid; gap:0; margin:16px 0 0">
           <div class="contact-item">
@@ -71,18 +72,17 @@
         </dl>
 
         <div style="margin-top:40px">
-          <div class="eyebrow" style="margin-bottom:16px"><span class="num">02</span>其他據點</div>
-          <ul style="display:grid; gap:12px; font-size:.9rem">
-            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid var(--line-light)">
+          <ul style="display:grid; gap:12px; font-size:1.0625rem">
+            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:10px">
               <span>上海・LTS</span><span class="muted">華東客戶服務</span>
             </li>
-            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid var(--line-light)">
+            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:10px">
               <span>深圳・LTZ</span><span class="muted">華南製造聚落</span>
             </li>
-            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid var(--line-light)">
+            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:10px">
               <span>香港・LTH</span><span class="muted">轉口與 HUB 倉</span>
             </li>
-            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:12px; border-bottom:1px solid var(--line-light)">
+            <li style="display:flex; justify-content:space-between; gap:16px; padding-bottom:10px">
               <span>日本・JHT</span><span class="muted">原廠窗口</span>
             </li>
           </ul>
@@ -94,8 +94,7 @@
       </div>
 
       <div>
-        <div class="eyebrow"><span class="num">03</span>需求表單</div>
-        <form class="form" data-demo novalidate>
+        <form class="form reveal" data-demo novalidate>
           <div class="field">
             <label for="f-name">姓名 / 稱呼</label>
             <input id="f-name" name="name" type="text" autocomplete="name" placeholder="王小明">
@@ -132,17 +131,15 @@
 
     </div>
   </section>
-
   <section class="section section--cream">
     <div class="wrap">
       <div class="grid-2" style="margin-top:0; align-items:center">
         <div>
-          <div class="eyebrow reveal"><span class="num">04</span>拜訪我們</div>
           <h2 class="h-lg reveal">內湖科學園區旁，<br>離客戶與原廠都不遠。</h2>
           <p class="lede reveal" style="margin-top:24px">總部位於內湖路一段，鄰近內湖科技園區。來訪前請先來電或來信安排，我們會準備好你要看的樣品與文件。</p>
         </div>
         <div class="reveal" style="--d:80ms">
-          <figure class="map">
+          <figure class="map reveal">
             <iframe class="map__frame"
               title="Google 地圖：隆電台北總部，台北市內湖區內湖路一段 250 號 11 樓"
               src="https://www.google.com/maps?q=%E5%8F%B0%E5%8C%97%E5%B8%82%E5%85%A7%E6%B9%96%E5%8D%80%E5%85%A7%E6%B9%96%E8%B7%AF%E4%B8%80%E6%AE%B5%20250%20%E8%99%9F%2011%20%E6%A8%93&z=17&hl=zh-TW&output=embed"
@@ -161,6 +158,13 @@
   </section>
 
 </main>
+
+<div class="wrap"><div class="imgband">
+        <figure class="reveal"><div class="imgband__img" role="img" aria-label="倉儲貨架上的電子零件紙箱" style="background-image:url('images/band-wafer.jpg')"></div><figcaption>台北總倉，批號與溫濕度都有紀錄。</figcaption></figure>
+        <figure class="reveal" style="--d:80ms"><div class="imgband__img" role="img" aria-label="無線通訊模組電路板微距" style="background-image:url('images/band-module.jpg')"></div><figcaption>送樣前，我們先確認模組與系統搭得起來。</figcaption></figure>
+        <figure class="reveal" style="--d:160ms"><div class="imgband__img" role="img" aria-label="感測器晶片與打線微距" style="background-image:url('images/band-die.jpg')"></div><figcaption>原廠文件、測試報告與替代料，一起交到你手上。</figcaption></figure>
+      </div>
+    </div>
 
 <footer class="site-footer">
   <div class="wrap">

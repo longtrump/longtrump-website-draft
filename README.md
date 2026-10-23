@@ -1,3 +1,29 @@
+# LTG 隆電 — GitHub Pages 草稿預覽
+
+這是隆電（公司中文名稱 **隆電**）形象網站的靜態設計提案，五頁、無建置流程。GitHub Pages 從 `main` 分支**根目錄**發布。
+
+**草稿預覽（不是正式官網）：** https://longtrump.github.io/longtrump-website-draft/
+
+正式網域 longtrump.com.tw、DNS 與網域設定都不在這個倉庫裡。合併後預覽站才會換成這版首頁。
+
+Pages 現況：來源為 `main` / `/`，沒有 CNAME、沒有自訂網域。根目錄的 `.nojekyll` 讓 Pages 略過 Jekyll，直接提供這些 HTML、CSS、JS 與圖片。
+
+路徑都是相對的（`assets/…`、`images/…`、`index.html` 等），沒有 `<base href>`。在專案站路徑 `/longtrump-website-draft/` 下這樣就能解析，不必再加 base。請從結尾有斜線的預覽網址，或從 `index.html` 等檔名進入。
+
+```
+index.html        首頁
+brands.html       產品線
+rochester.html    Rochester 查詢
+about.html        關於隆電
+contact.html      聯絡我們
+assets/           樣式、腳本、favicon、公司 logo
+images/           主視覺與橫幅圖
+```
+
+下面是設計包原本的說明。其中提到的 `shots/` 與 `tools/` 是本機稽核用，沒有放進這個 Pages 倉庫。
+
+---
+
 # LTG 隆電 — 形象網站（設計提案）
 
 靜態網站，五頁，無建置流程。直接用瀏覽器打開 `index.html` 即可。
@@ -19,13 +45,14 @@ shots/                   版面驗證截圖（桌面／平板／手機）
 tools/                   audit.mjs（版面／資源稽核）、checks.mjs（對比與導覽檢查）、rl-check.mjs（Rochester 查詢）
 ```
 
-## 設計方向（來自 Notion「網站改版」）
+## 設計方向（2026-10 美術方向 A：晶圓廠技術文件）
 
-- 顏色：品牌海軍藍 `#0c1725` + 奶油色 `#f5efe3`，銅色 `#b4552e` 只用在 CTA 與小標
-- 字體：標題 Noto Serif TC（編輯襯線），內文 Noto Sans TC 300
+- 顏色：深海藍 `#0c1725` + 骨白 `#f5efe3`，訊號紅 `#d21f2b`（取自 logo）只用在主要動作與一個資料重點
+- 字體：標題 Noto Serif TC，內文 Noto Sans TC；五級字 13 / 17 / 20 / 40 / 70（small / body / lead / section / display）
 - 間距：8pt 網格（`--s-1` … `--s-20`），大量留白
 - 圖像：真實材質微距（晶圓、模組、感測器、電池、倉儲、實驗室），不用握手圖庫照
-- 動效：只做「進場」與 hover，尊重 `prefers-reduced-motion`
+- 版面：首屏只留一個主體（H1＋一個 CTA）；Rochester 查詢頁把搜尋框放進首屏\n- 記憶點：首頁「一顆料的履歷」— 用 LM358ADR2G 的即時資料做成一張技術資料卡，連到 16 欄查詢頁
+- 動效：只做「進場」、hover 與 hero 極慢縮放，尊重 `prefers-reduced-motion`
 - 無障礙：跳至主要內容、可見 focus、AA 對比、圖片 alt、單一 h1
 
 ## 內容來源（Notion 公司知識庫）
