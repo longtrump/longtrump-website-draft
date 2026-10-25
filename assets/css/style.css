@@ -1839,3 +1839,70 @@ table.rl-table td.rl-over a:hover { color: var(--accent); }
 }
 
 code { font-family: var(--sans); font-size: 17px; }
+
+/* ---------- 企業形象影片 (company intro video) ---------- */
+.video-feature__head { max-width: 40em; }
+.video-feature__label {
+  margin: 0 0 var(--s-2);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.section--dark .video-feature__label { color: var(--accent-soft); }
+.video-feature__head .h-lg { margin: 0; }
+.video-feature__caption {
+  margin: var(--s-3) 0 0;
+  font-size: var(--fs-body);
+  color: var(--on-light-muted);
+}
+.section--dark .video-feature__caption { color: var(--on-dark-muted); }
+.video-frame {
+  margin: var(--s-6) 0 0;
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  background: var(--ink);
+  border-radius: 4px;
+  box-shadow: 0 24px 60px -28px rgba(12, 23, 37, 0.55);
+}
+.video-frame figcaption {
+  margin-top: var(--s-2);
+  font-size: var(--fs-small);
+  color: var(--on-light-muted);
+}
+.section--dark .video-frame figcaption { color: var(--on-dark-muted); }
+.video-feature__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: var(--s-8);
+  align-items: center;
+}
+.video-feature__grid .video-frame { margin: 0; }
+.video-feature__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--s-4);
+  padding-bottom: 4px;
+  border-bottom: 1px solid currentColor;
+  color: var(--accent-ink);
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: gap 0.3s;
+}
+.video-feature__more:hover { gap: 12px; }
+@media (max-width: 860px) {
+  .video-feature__grid { grid-template-columns: 1fr; gap: var(--s-5); }
+  .video-frame { margin-top: var(--s-5); }
+  .video-feature__grid .video-frame { margin: 0; }
+}
+@media (max-width: 620px) {
+  .video-frame { margin-inline: calc(var(--gutter) * -1); }
+  .video-frame video { border-radius: 0; box-shadow: none; }
+  .video-frame figcaption { padding-inline: var(--gutter); }
+}
