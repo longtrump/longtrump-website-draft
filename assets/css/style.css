@@ -1857,12 +1857,20 @@ code { font-family: var(--sans); font-size: 17px; }
   color: var(--on-light-muted);
 }
 .section--dark .video-feature__caption { color: var(--on-dark-muted); }
+/* 80px fixed header + caption and clearance so the 16:9 frame and its
+   controls stay inside the viewport. 100vh is the fallback; 100svh wins
+   where it is supported. On a tall narrow screen, 100% width still governs. */
+.video-frame,
+.video-frame video {
+  width: min(100%, calc((100vh - 180px) * 16 / 9));
+  width: min(100%, calc((100svh - 180px) * 16 / 9));
+  margin-inline: auto;
+}
 .video-frame {
-  margin: var(--s-6) 0 0;
+  margin-top: var(--s-6);
 }
 .video-frame video {
   display: block;
-  width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
   background: var(--ink);
@@ -1881,7 +1889,7 @@ code { font-family: var(--sans); font-size: 17px; }
   gap: var(--s-8);
   align-items: center;
 }
-.video-feature__grid .video-frame { margin: 0; }
+.video-feature__grid .video-frame { margin-block: 0; justify-self: center; }
 .video-feature__more {
   display: inline-flex;
   align-items: center;
@@ -1899,10 +1907,18 @@ code { font-family: var(--sans); font-size: 17px; }
 @media (max-width: 860px) {
   .video-feature__grid { grid-template-columns: 1fr; gap: var(--s-5); }
   .video-frame { margin-top: var(--s-5); }
-  .video-feature__grid .video-frame { margin: 0; }
+  .video-feature__grid .video-frame { margin-block: 0; }
 }
 @media (max-width: 620px) {
-  .video-frame { margin-inline: calc(var(--gutter) * -1); }
-  .video-frame video { border-radius: 0; box-shadow: none; }
+  /* Portrait phones: let width govern and keep the full-bleed frame.
+     width:auto + negative margins grow into the gutter; the height cap
+     still applies if the screen is also very short. */
+  .video-frame {
+    width: auto;
+    max-width: calc((100vh - 180px) * 16 / 9);
+    max-width: calc((100svh - 180px) * 16 / 9);
+    margin-inline: calc(var(--gutter) * -1);
+  }
+  .video-frame video { width: 100%; border-radius: 0; box-shadow: none; }
   .video-frame figcaption { padding-inline: var(--gutter); }
 }
