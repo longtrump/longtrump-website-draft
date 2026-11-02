@@ -68,7 +68,9 @@
       var open = header.classList.toggle('nav-open');
       document.body.classList.toggle('nav-open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      toggle.setAttribute('aria-label', open ? '關閉導覽選單' : '開啟導覽選單');
+      var openLabel = toggle.getAttribute('data-label-open') || '開啟導覽選單';
+      var closeLabel = toggle.getAttribute('data-label-close') || '關閉導覽選單';
+      toggle.setAttribute('aria-label', open ? closeLabel : openLabel);
     });
 
     if (nav) {
@@ -93,7 +95,7 @@
       e.preventDefault();
       var note = form.querySelector('[data-form-note]');
       if (note) {
-        note.textContent = '已收到您的需求（示範表單）。正式上線時請接上表單服務或寄送至業務信箱。';
+        note.textContent = form.getAttribute('data-demo-done') || '已收到您的需求（示範表單）。正式上線時請接上表單服務或寄送至業務信箱。';
         note.style.color = 'var(--accent)';
       }
     });
@@ -115,4 +117,14 @@
   }, { passive: true });
 
   syncHeader();
+
+  /* Keep the language switcher on the same page, including ?query and #hash. */
+  var langSuffix = window.location.search + window.location.hash;
+  if (langSuffix) {
+    Array.prototype.forEach.call(document.querySelectorAll('.lang-switch a[href]'), function (a) {
+      var href = a.getAttribute('href');
+      if (!href || /^(?:[a-z]+:|\/\/)/i.test(href)) return;
+      a.setAttribute('href', href.split('#')[0].split('?')[0] + langSuffix);
+    });
+  }
 })();

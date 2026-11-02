@@ -20,8 +20,9 @@
   var busy = false;
   var pendingScroll = false;
 
-  /* Fixed output columns — matches the source page one for one. */
-  var COLUMNS = [
+  /* Column order is fixed. Labels follow <html lang>; zh-Hant keeps the
+     original English headers. Price math below does not read these strings. */
+  var COLUMN_EN = [
     'Part Number',
     'ECCN',
     'Rohs Available',
@@ -39,6 +40,131 @@
     'Notes',
     'Qty'
   ];
+
+  function localeKey() {
+    var lang = (document.documentElement.lang || 'zh-Hant').toLowerCase();
+    if (lang === 'zh-cn' || lang === 'zh-hans') return 'zh-CN';
+    if (lang === 'en' || lang.indexOf('en-') === 0) return 'en';
+    if (lang === 'ja' || lang.indexOf('ja-') === 0) return 'ja';
+    return 'zh-Hant';
+  }
+
+  var UI = {
+    'zh-Hant': {
+      timeLocale: 'zh-TW',
+      columns: COLUMN_EN,
+      contactUs: 'Contact Us',
+      needQuery: '請先輸入料號，例如 LM358',
+      loading: '正在查詢 Rochester 授權庫存…',
+      matchZero: '符合 0 個料號',
+      match: function (n) { return '符合 ' + n + ' 個料號'; },
+      showing: function (parts, rows) { return '顯示前 ' + parts + ' 個、' + rows + ' 筆批號'; },
+      rows: function (rows) { return '共 ' + rows + ' 筆批號'; },
+      queried: function (time) { return time + ' 查詢'; },
+      scrollHint: function (rows) { return '共 ' + rows + ' 筆批號；表格可上下、左右捲動，表頭與料號欄固定'; },
+      regionLabel: 'Rochester 查詢結果，可橫向捲動',
+      caption: function (n) { return 'Rochester 現貨查詢結果，共 ' + n + ' 筆批號'; },
+      noneTitle: function (q) { return '查無「' + q + '」的現貨資料'; },
+      noneBody: 'Rochester 只列出有庫存或曾生產的料號。試試更短的前綴（例如把 LM358DR 縮成 LM358），或直接把型號寄給我們，由業務代查替代料與停產前最後一批。',
+      askUs: '請我們代查',
+      rocelec: '到 rocelec.com 查詢 ↗',
+      mailSubject: function (q) { return 'Rochester 代查料號：' + q; },
+      failed: '查詢沒有完成，請稍後再試',
+      errorTitle: '原廠查詢服務暫時沒有回應',
+      errorBody: '可能是網路中斷，或 Rochester 端正在忙碌。你可以重試一次，或直接把料號寄給我們，由業務代查庫存與交期。',
+      retry: '再試一次',
+      emailUs: '寄料號給我們'
+    },
+    'zh-CN': {
+      timeLocale: 'zh-CN',
+      columns: [
+        '料号', 'ECCN', 'RoHS',
+        '价格：1–24', '价格：25–99', '价格：100–499', '价格：500–999',
+        '价格：1,000–9,999', '价格：10,000–99,999', '以上批量',
+        '制造商代码', '无铅', '总现货', '批次年份', '备注', '数量'
+      ],
+      contactUs: '联系我们',
+      needQuery: '请先输入料号，例如 LM358',
+      loading: '正在查询 Rochester 授权库存…',
+      matchZero: '符合 0 个料号',
+      match: function (n) { return '符合 ' + n + ' 个料号'; },
+      showing: function (parts, rows) { return '显示前 ' + parts + ' 个、' + rows + ' 笔批号'; },
+      rows: function (rows) { return '共 ' + rows + ' 笔批号'; },
+      queried: function (time) { return time + ' 查询'; },
+      scrollHint: function (rows) { return '共 ' + rows + ' 笔批号；表格可上下、左右滚动，表头与料号栏固定'; },
+      regionLabel: 'Rochester 查询结果，可横向滚动',
+      caption: function (n) { return 'Rochester 现货查询结果，共 ' + n + ' 笔批号'; },
+      noneTitle: function (q) { return '查无“' + q + '”的现货资料'; },
+      noneBody: 'Rochester 只列出有库存或曾生产的料号。试试更短的前缀（例如把 LM358DR 缩成 LM358），或直接把型号寄给我们，由业务代查替代料与停产前最后一批。',
+      askUs: '请我们代查',
+      rocelec: '到 rocelec.com 查询 ↗',
+      mailSubject: function (q) { return 'Rochester 代查料号：' + q; },
+      failed: '查询没有完成，请稍后再试',
+      errorTitle: '原厂查询服务暂时没有回应',
+      errorBody: '可能是网络中断，或 Rochester 端正在忙碌。你可以重试一次，或直接把料号寄给我们，由业务代查库存与交期。',
+      retry: '再试一次',
+      emailUs: '寄料号给我们'
+    },
+    'en': {
+      timeLocale: 'en',
+      columns: COLUMN_EN,
+      contactUs: 'Contact us',
+      needQuery: 'Enter a part number first, for example LM358',
+      loading: 'Searching Rochester authorized inventory…',
+      matchZero: '0 part numbers matched',
+      match: function (n) { return n + ' part numbers matched'; },
+      showing: function (parts, rows) { return 'Showing the first ' + parts + ', ' + rows + ' date-code rows'; },
+      rows: function (rows) { return rows + ' date-code rows in total'; },
+      queried: function (time) { return 'Queried at ' + time; },
+      scrollHint: function (rows) { return rows + ' date-code rows. Scroll the table vertically and horizontally. The header and part-number column stay fixed.'; },
+      regionLabel: 'Rochester results, scroll horizontally',
+      caption: function (n) { return 'Rochester stock search results, ' + n + ' date-code rows'; },
+      noneTitle: function (q) { return 'No stock data for “' + q + '”'; },
+      noneBody: 'Rochester only lists part numbers that are in stock or have been built. Try a shorter prefix (for example shorten LM358DR to LM358), or send us the part number and sales will look up an alternate and the last lot before end of life.',
+      askUs: 'Ask us to look it up',
+      rocelec: 'Search on rocelec.com ↗',
+      mailSubject: function (q) { return 'Rochester lookup: ' + q; },
+      failed: 'The search did not finish. Please try again later.',
+      errorTitle: 'The factory search service is not responding',
+      errorBody: 'The network may be down, or Rochester may be busy. Try again, or send us the part number and sales will check stock and lead time.',
+      retry: 'Try again',
+      emailUs: 'Email us the part number'
+    },
+    'ja': {
+      timeLocale: 'ja',
+      columns: [
+        '型番', 'ECCN', 'RoHS',
+        '価格: 1–24', '価格: 25–99', '価格: 100–499', '価格: 500–999',
+        '価格: 1,000–9,999', '価格: 10,000–99,999', 'それ以上',
+        'メーカーコード', 'Pbフリー', '総在庫数', 'デートコード', '備考', '数量'
+      ],
+      contactUs: 'お問い合わせ',
+      needQuery: '型番を入力してください。例：LM358',
+      loading: 'Rochester の正規在庫を検索しています…',
+      matchZero: '該当する型番は 0 件です',
+      match: function (n) { return '該当 ' + n + ' 型番'; },
+      showing: function (parts, rows) { return '先頭 ' + parts + ' 型番、' + rows + ' 件のデートコードを表示'; },
+      rows: function (rows) { return 'デートコード ' + rows + ' 件'; },
+      queried: function (time) { return time + ' 検索'; },
+      scrollHint: function (rows) { return 'デートコード ' + rows + ' 件。表は上下・左右にスクロールできます。見出しと型番列は固定です。'; },
+      regionLabel: 'Rochester の検索結果。横にスクロールできます',
+      caption: function (n) { return 'Rochester 在庫検索の結果、デートコード ' + n + ' 件'; },
+      noneTitle: function (q) { return '「' + q + '」の在庫データはありません'; },
+      noneBody: 'Rochester は在庫がある、または製造実績のある型番だけを返します。より短い前方一致（たとえば LM358DR を LM358 にする）を試すか、型番を送ってください。営業が代替品と製造中止前の最終ロットを調べます。',
+      askUs: '代わりに調べてもらう',
+      rocelec: 'rocelec.com で検索 ↗',
+      mailSubject: function (q) { return 'Rochester 調査依頼：' + q; },
+      failed: '検索が完了しませんでした。しばらくしてから再度お試しください。',
+      errorTitle: 'メーカー側の検索サービスが応答していません',
+      errorBody: 'ネットワークが切れているか、Rochester 側が混み合っている可能性があります。もう一度試すか、型番を送ってください。営業が在庫と納期を確認します。',
+      retry: 'もう一度試す',
+      emailUs: '型番をメールする'
+    }
+  };
+
+  function L() {
+    return UI[localeKey()] || UI['zh-Hant'];
+  }
 
   /* ---------- custom price rate (ported from the live page) ---------- */
 
@@ -139,7 +265,7 @@
   }
 
   function stamp() {
-    return new Date().toLocaleTimeString('zh-TW', { hour12: false });
+    return new Date().toLocaleTimeString(L().timeLocale, { hour12: false });
   }
 
   function fmt(n) {
@@ -191,14 +317,14 @@
     pendingScroll = reveal || false;
     if (!q) {
       input.focus();
-      setStatus(['請先輸入料號，例如 LM358'], 'error');
+      setStatus([L().needQuery], 'error');
       return;
     }
     if (busy) return;
 
     if (input.value !== q) input.value = q;
     setBusy(true);
-    setStatus(['正在查詢 Rochester 授權庫存…'], 'loading');
+    setStatus([L().loading], 'loading');
     resultsEl.textContent = '';
 
     var controller = typeof AbortController === 'function' ? new AbortController() : null;
@@ -248,7 +374,7 @@
 
     if (!rows.length) {
       renderNone(q);
-      setStatus(['符合 0 個料號', stamp()], '');
+      setStatus([L().matchZero, stamp()], '');
       return;
     }
 
@@ -258,13 +384,14 @@
     }, {})).length;
     var total = Number(data.total_count) || partsCount;
 
-    var status = ['符合 ' + fmt(total) + ' 個料號'];
-    if (total > partsCount) status.push('顯示前 ' + fmt(partsCount) + ' 個、' + fmt(rows.length) + ' 筆批號');
-    else status.push('共 ' + fmt(rows.length) + ' 筆批號');
-    status.push(stamp() + ' 查詢');
+    var ui = L();
+    var status = [ui.match(fmt(total))];
+    if (total > partsCount) status.push(ui.showing(fmt(partsCount), fmt(rows.length)));
+    else status.push(ui.rows(fmt(rows.length)));
+    status.push(ui.queried(stamp()));
     setStatus(status, '');
 
-    resultsEl.appendChild(el('p', 'rl-scrollhint', '共 ' + fmt(rows.length) + ' 筆批號；表格可上下、左右捲動，表頭與料號欄固定'));
+    resultsEl.appendChild(el('p', 'rl-scrollhint', ui.scrollHint(fmt(rows.length))));
     resultsEl.appendChild(buildTable(rows));
     revealResults();
   }
@@ -273,14 +400,15 @@
     var wrap = el('div', 'rl-tablewrap');
     wrap.tabIndex = 0;
     wrap.setAttribute('role', 'region');
-    wrap.setAttribute('aria-label', 'Rochester 查詢結果，可橫向捲動');
+    var ui = L();
+    wrap.setAttribute('aria-label', ui.regionLabel);
 
     var table = el('table', 'rl-table');
-    table.appendChild(el('caption', 'sr-only', 'Rochester 現貨查詢結果，共 ' + rows.length + ' 筆批號'));
+    table.appendChild(el('caption', 'sr-only', ui.caption(rows.length)));
 
     var thead = el('thead', '');
     var headRow = el('tr', '');
-    COLUMNS.forEach(function (label, i) {
+    ui.columns.forEach(function (label, i) {
       var th = el('th', '', label);
       th.scope = 'col';
       if (i >= 3 && i <= 9) th.className = 'is-price';
@@ -305,7 +433,7 @@
       });
 
       var over = el('td', 'is-price rl-over');
-      var link = el('a', '', 'Contact Us');
+      var link = el('a', '', L().contactUs);
       link.href = CONTACT;
       over.appendChild(link);
       tr.appendChild(over);
@@ -326,14 +454,15 @@
 
   function renderNone(q) {
     var box = el('div', 'rl-none');
-    box.appendChild(el('h3', '', '查無「' + q + '」的現貨資料'));
-    box.appendChild(el('p', '', 'Rochester 只列出有庫存或曾生產的料號。試試更短的前綴（例如把 LM358DR 縮成 LM358），或直接把型號寄給我們，由業務代查替代料與停產前最後一批。'));
+    var ui = L();
+    box.appendChild(el('h3', '', ui.noneTitle(q)));
+    box.appendChild(el('p', '', ui.noneBody));
 
     var acts = el('div', 'rl-none__acts');
-    var retry = el('a', 'rl-btn rl-btn--solid', '請我們代查');
-    retry.href = 'mailto:service@longtrump.com.tw?subject=' + encodeURIComponent('Rochester 代查料號：' + q);
+    var retry = el('a', 'rl-btn rl-btn--solid', ui.askUs);
+    retry.href = 'mailto:service@longtrump.com.tw?subject=' + encodeURIComponent(ui.mailSubject(q));
     acts.appendChild(retry);
-    var rocelec = el('a', 'rl-btn', '到 rocelec.com 查詢 ↗');
+    var rocelec = el('a', 'rl-btn', ui.rocelec);
     rocelec.href = 'https://www.rocelec.com/';
     rocelec.target = '_blank';
     rocelec.rel = 'noopener';
@@ -346,19 +475,20 @@
 
   function renderError(q, err) {
     if (window.console && console.warn) console.warn('Rochester lookup failed:', err);
-    setStatus(['查詢沒有完成，請稍後再試'], 'error');
+    var ui = L();
+    setStatus([ui.failed], 'error');
 
     var box = el('div', 'rl-none');
-    box.appendChild(el('h3', '', '原廠查詢服務暫時沒有回應'));
-    box.appendChild(el('p', '', '可能是網路中斷，或 Rochester 端正在忙碌。你可以重試一次，或直接把料號寄給我們，由業務代查庫存與交期。'));
+    box.appendChild(el('h3', '', ui.errorTitle));
+    box.appendChild(el('p', '', ui.errorBody));
 
     var acts = el('div', 'rl-none__acts');
-    var retry = el('button', 'rl-btn', '再試一次');
+    var retry = el('button', 'rl-btn', ui.retry);
     retry.type = 'button';
     retry.addEventListener('click', function () { search(q); });
     acts.appendChild(retry);
-    var mail = el('a', 'rl-btn rl-btn--solid', '寄料號給我們');
-    mail.href = 'mailto:service@longtrump.com.tw?subject=' + encodeURIComponent('Rochester 代查料號：' + q);
+    var mail = el('a', 'rl-btn rl-btn--solid', ui.emailUs);
+    mail.href = 'mailto:service@longtrump.com.tw?subject=' + encodeURIComponent(ui.mailSubject(q));
     acts.appendChild(mail);
     box.appendChild(acts);
 

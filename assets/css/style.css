@@ -28,7 +28,7 @@
   --line-dark: rgba(245, 239, 227, 0.16);
   --line-light: rgba(20, 33, 47, 0.14);
 
-  /* type */
+  /* type — Traditional Chinese. Other languages override below. */
   --serif: "Noto Serif TC", "Songti TC", "Source Han Serif TC", Georgia, "Times New Roman", serif;
   --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Helvetica Neue", Arial, sans-serif;
 
@@ -57,6 +57,21 @@
   --max: 1280px;
 
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Simplified Chinese, Japanese, and English keep the same scale.
+   CJK families are loaded only on those pages so zh-Hant is unchanged. */
+html[lang="zh-CN"] {
+  --serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "Noto Serif TC", Georgia, "Times New Roman", serif;
+  --sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+}
+html[lang="ja"] {
+  --serif: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif TC", Georgia, serif;
+  --sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
+}
+html[lang="en"] {
+  --serif: "Noto Serif", "Noto Serif TC", Georgia, "Times New Roman", serif;
+  --sans: "Noto Sans", "Noto Sans TC", "Helvetica Neue", Arial, sans-serif;
 }
 
 /* ---------- 2. Reset ---------- */
@@ -280,7 +295,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   align-items: center;
   gap: clamp(20px, 2.6vw, 40px);
 }
-.nav a {
+.nav > a {
   position: relative;
   font-size: 17px;
   letter-spacing: 0.14em;
@@ -288,7 +303,9 @@ ul { margin: 0; padding: 0; list-style: none; }
   padding-block: 6px;
   transition: color 0.3s;
 }
-.nav a::after {
+html[lang="en"] .nav > a,
+html[lang="ja"] .nav > a { letter-spacing: 0.04em; }
+.nav > a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -300,10 +317,47 @@ ul { margin: 0; padding: 0; list-style: none; }
   transform-origin: left;
   transition: transform 0.4s var(--ease);
 }
-.nav a:hover,
-.nav a[aria-current="page"] { color: var(--cream); }
-.nav a:hover::after,
-.nav a[aria-current="page"]::after { transform: scaleX(1); }
+.nav > a:hover,
+.nav > a[aria-current="page"] { color: var(--cream); }
+.nav > a:hover::after,
+.nav > a[aria-current="page"]::after { transform: scaleX(1); }
+
+/* Language switcher — same page in 繁中 / 简中 / English / 日本語 */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  margin-left: 4px;
+  padding-left: 12px;
+  border-left: 1px solid rgba(245, 239, 227, 0.22);
+}
+.lang-switch a {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--on-dark-muted);
+  padding: 6px 7px;
+  white-space: nowrap;
+}
+.lang-switch a:hover,
+.lang-switch a[aria-current="true"] {
+  color: var(--cream);
+}
+.lang-switch a[aria-current="true"] {
+  font-weight: 500;
+  box-shadow: inset 0 -1px 0 var(--accent-soft);
+}
+.lang-switch a[lang="ja"] {
+  font-family: "Noto Sans JP", "Hiragino Sans", "Noto Sans TC", "Noto Sans SC", sans-serif;
+}
+.lang-switch a[lang="zh-CN"] {
+  font-family: "Noto Sans SC", "Noto Sans TC", "Microsoft YaHei", sans-serif;
+}
+.lang-switch a[lang="zh-Hant"] {
+  font-family: "Noto Sans TC", "Noto Sans SC", "PingFang TC", sans-serif;
+}
 
 .header-cta {
   font-size: 13px;
@@ -444,6 +498,10 @@ ul { margin: 0; padding: 0; list-style: none; }
   grid-template-columns: 5.5em 1fr;
   gap: 10px 16px;
   margin: 0;
+}
+html[lang="en"] .hero__meta dl,
+html[lang="ja"] .hero__meta dl {
+  grid-template-columns: 7.6em 1fr;
 }
 .hero__meta dt {
   color: var(--on-dark-muted);
@@ -1576,6 +1634,16 @@ table.rl-table td.rl-over a:hover { color: var(--accent); }
 [id] { scroll-margin-top: 96px; }
 
 /* ---------- 22. Responsive ---------- */
+@media (max-width: 1180px) {
+  .nav { gap: 14px; }
+  .nav > a { letter-spacing: 0.05em; font-size: 15px; }
+  html[lang="en"] .nav > a,
+  html[lang="ja"] .nav > a { letter-spacing: 0.02em; }
+  .lang-switch { padding-left: 8px; }
+  .lang-switch a { padding: 6px 5px; }
+  .header-cta { padding: 9px 12px; }
+}
+
 @media (max-width: 1080px) {
   .hero__grid { grid-template-columns: 1fr; gap: var(--s-6); }
   .hero__meta { display: none; }
@@ -1604,10 +1672,22 @@ table.rl-table td.rl-over a:hover { color: var(--accent); }
     gap: var(--s-1);
     border-bottom: 1px solid var(--line-dark);
   }
-  .nav-open .nav a {
+  .nav-open .nav > a {
     font-size: 17px;
     padding-block: 12px;
     border-bottom: 1px solid rgba(245, 239, 227, 0.08);
+  }
+  .nav-open .lang-switch {
+    margin-left: 0;
+    padding: 14px 0 4px;
+    border-left: 0;
+    border-top: 1px solid rgba(245, 239, 227, 0.16);
+    flex-wrap: wrap;
+    gap: 4px 2px;
+  }
+  .nav-open .lang-switch a {
+    font-size: 16px;
+    padding: 8px 12px;
   }
   .nav-open .header-cta {
     display: inline-flex;
@@ -1712,6 +1792,19 @@ table.rl-table td.rl-over a:hover { color: var(--accent); }
   table.brands td:nth-child(2)::before { content: "領域"; }
   table.brands td:nth-child(3)::before { content: "對應應用"; }
   table.brands td:nth-child(4)::before { content: "業務線"; }
+  html[lang="zh-CN"] table.brands td:nth-child(2)::before { content: "领域"; }
+  html[lang="zh-CN"] table.brands td:nth-child(3)::before { content: "对应应用"; }
+  html[lang="zh-CN"] table.brands td:nth-child(4)::before { content: "业务线"; }
+  html[lang="en"] table.brands td:nth-child(1)::before { content: "Brand"; }
+  html[lang="en"] table.brands td:nth-child(2)::before { content: "Field"; }
+  html[lang="en"] table.brands td:nth-child(3)::before { content: "Applications"; }
+  html[lang="en"] table.brands td:nth-child(4)::before { content: "Line"; }
+  html[lang="ja"] table.brands td:nth-child(1)::before { content: "ブランド"; }
+  html[lang="ja"] table.brands td:nth-child(2)::before { content: "分野"; }
+  html[lang="ja"] table.brands td:nth-child(3)::before { content: "用途"; }
+  html[lang="ja"] table.brands td:nth-child(4)::before { content: "事業"; }
+  html[lang="en"] table.brands td,
+  html[lang="ja"] table.brands td { grid-template-columns: 7.2em 1fr; }
   table.brands td:first-child {
     font-size: 17px;
     white-space: normal;
