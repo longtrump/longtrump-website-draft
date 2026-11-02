@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<script>document.documentElement.classList.add('js')</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rochester 料号查询｜隆电 LTG</title>
+<meta name="description" content="Rochester Electronics 现货查询：输入料号实时核对现货量、批号年份、ECCN、RoHS。70 家原厂授权、20 万个料号、15 亿颗现货。">
+<meta name="theme-color" content="#0c1725">
+  <link rel="alternate" hreflang="zh-Hant" href="../rochester.html">
+  <link rel="alternate" hreflang="zh-CN" href="rochester.html">
+  <link rel="alternate" hreflang="en" href="../en/rochester.html">
+  <link rel="alternate" hreflang="ja" href="../ja/rochester.html">
+  <link rel="alternate" hreflang="x-default" href="../rochester.html">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">跳至主要内容</a>
+
+<header class="site-header is-solid" id="header">
+  <div class="wrap site-header__inner">
+    <a class="brand" href="index.html" aria-label="隆电 LTG 首页">
+      <img class="brand__logo" src="../assets/logo-ltg-light.png" alt="隆电 LTG" width="280" height="70">
+    </a>
+    <nav class="nav" id="nav" aria-label="主要导航">
+      <a href="index.html">首页</a>
+      <a href="brands.html">产品线</a>
+      <a href="rochester.html" aria-current="page">Rochester 查询</a>
+      <a href="about.html">关于隆电</a>
+      <a href="contact.html">联系我们</a>
+    <div class="lang-switch" role="group" aria-label="语言">
+      <a href="../rochester.html" hreflang="zh-Hant" lang="zh-Hant">繁中</a>
+      <a href="rochester.html" hreflang="zh-CN" lang="zh-CN" aria-current="true">简中</a>
+      <a href="../en/rochester.html" hreflang="en" lang="en">English</a>
+      <a href="../ja/rochester.html" hreflang="ja" lang="ja">日本語</a>
+    </div>
+    </nav>
+    <a class="header-cta" href="contact.html">业务咨询</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="nav" aria-label="打开导航菜单" data-label-open="打开导航菜单" data-label-close="关闭导航菜单">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero page-hero--image rl-hero-section">
+    <div class="page-hero__media">
+      <img src="../images/warehouse.png" alt="仓储货架上整齐排列的电子零件纸箱" width="1024" height="572" fetchpriority="high">
+    </div>
+    <div class="wrap">
+      <div class="rl-hero">
+        <div class="rl-hero__copy">
+          <h1>Rochester<br>现货查询</h1>
+          <p>70 家原厂授权、20 万个料号、15 亿颗现货。输入料号，核对现货量与批号年份。</p>
+          <dl class="rl-hero__facts">
+            <div><dt>15 亿+</dt><dd>现货颗数</dd></div>
+            <div><dt>20 万+</dt><dd>可查料号</dd></div>
+            <div><dt>70+</dt><dd>授权原厂</dd></div>
+          </dl>
+        </div>
+
+        <div class="rl-hero__search reveal">
+          <form class="rl-form" id="rlForm" role="search">
+            <label class="rl-label" for="rlInput">输入料号</label>
+            <div class="rl-field">
+              <svg class="rl-field__icon" width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <circle cx="8.6" cy="8.6" r="5.4" stroke="currentColor" stroke-width="1.4"/>
+                <path d="M12.8 12.8 17 17" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+              </svg>
+              <input class="rl-input" id="rlInput" name="q" type="search" inputmode="search"
+                autocomplete="off" autocapitalize="characters" spellcheck="false"
+                placeholder="例如 LM358" aria-describedby="rlHint">
+              <button class="btn rl-submit" type="submit">查询
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 2.5 12.5 7 8 11.5" stroke="currentColor" stroke-width="1.2"/></svg>
+              </button>
+            </div>
+          </form>
+          <p class="rl-hint" id="rlHint">支持完整料号或前缀，一次最多回传约 20 个料号；实际交期以业务回复为准。</p>
+
+          <div class="rl-suggest">
+            <span class="rl-suggest__label">热门料号</span>
+            <button class="rl-chip" type="button" data-q="LM358">LM358</button>
+            <button class="rl-chip" type="button" data-q="IRF3710PBF">IRF3710PBF</button>
+            <button class="rl-chip" type="button" data-q="SN74AVC2T45YZPR">SN74AVC2T45YZPR</button>
+            <button class="rl-chip" type="button" data-q="CAT24C256WI-GT3">CAT24C256WI-GT3</button>
+            <button class="rl-chip" type="button" data-q="FOD814">FOD814</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--paper" id="lookup">
+    <div class="wrap">
+      <div class="rl-results-head reveal">
+        <h2 class="h-md">查询结果</h2>
+        <p>数据实时来自 Rochester 授权库存。</p>
+      </div>
+
+      <div class="rl-status" id="rlStatus" role="status" aria-live="polite"></div>
+
+      <div class="rl-results" id="rlResults" aria-busy="false">
+        <div class="rl-empty">
+          <h3>输入完整料号，或先用前缀试试</h3>
+          <p>结果会以 16 个字段呈现：料号、ECCN、RoHS、六段批量价、制造商代码、Pb Free、总现货、批号年份、备注与该批数量。每一列是一笔批号，同一料号会出现多列。</p>
+          <ul class="rl-empty__tips">
+            <li><b>前缀查询</b>：<code>LM358</code> 会列出 22 个料号、82 笔批号。</li>
+            <li><b>完整料号</b>：<code>LM358ADR2G</code> 只留下单一料号。</li>
+            <li><b>查不到时</b>：把型号寄给我们，由业务代查替代料。</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="rl-foot">
+        空白表示该批量区间不适用，“Prices: Over”请洽业务。Date Code 显示年份末两码。
+      </p>
+    </div>
+  </section>
+  <section class="section section--cream">
+    <div class="wrap">
+      <h2 class="h-lg reveal">这个月，原厂在推这些料。</h2>
+      <div class="rl-feat">
+        <article class="rl-feat__item reveal">
+          <div class="rl-feat__meta"><span>处理器与外设</span><span>Texas Instruments</span></div>
+          <h3>SN74AVC2T45YZPR</h3>
+          <p>双电源 2-bit 非反相总线收发器，可配置电平转换，8-pin DSBGA 封装；另有 SM8 与 VSSOP 选项。</p>
+          <a class="link-arrow" href="https://www.ti.com/lit/ds/symlink/sn74avc2t45.pdf" target="_blank" rel="noopener">下载规格书</a>
+        </article>
+        <article class="rl-feat__item reveal" style="--d:60ms">
+          <div class="rl-feat__meta"><span>逻辑</span><span>NXP</span></div>
+          <h3>MKL25Z128VLK4</h3>
+          <p>Kinetis L 系列 MCU，USB 2.0、48 MHz、128KB Flash 与 16KB RAM，内置收发器、ADC／DAC。</p>
+          <a class="link-arrow" href="https://rocelec.widen.net/view/pdf/a2mgkgkjyt/FSCL-S-A0000427405-1.pdf?t.download=true&u=5oefqw" target="_blank" rel="noopener">下载规格书</a>
+        </article>
+        <article class="rl-feat__item reveal" style="--d:120ms">
+          <div class="rl-feat__meta"><span>存储</span><span>onsemi</span></div>
+          <h3>CAT24C256WI-GT3</h3>
+          <p>256K-bit I²C 串行 EEPROM，支持标准与 Fast 协议，可寻址 8 颗；100 万次抹写、100 年数据保存。</p>
+          <a class="link-arrow" href="https://rocelec.widen.net/view/pdf/um5y4nvohf/CATSS00817-1.pdf?t.download=true&u=5oefqw" target="_blank" rel="noopener">下载规格书</a>
+        </article>
+        <article class="rl-feat__item reveal" style="--d:180ms">
+          <div class="rl-feat__meta"><span>分立器件</span><span>Infineon</span></div>
+          <h3>IRF3710PBF</h3>
+          <p>HEXFET 功率 MOSFET，低导通电阻、切换速度快，TO-220 封装，适合商用与工业电源设计。</p>
+          <a class="link-arrow" href="https://rocelec.widen.net/view/pdf/dawne9ebza/IRSDS11475-1.pdf?t.download=true&u=5oefqw" target="_blank" rel="noopener">下载规格书</a>
+        </article>
+        <article class="rl-feat__item reveal" style="--d:240ms">
+          <div class="rl-feat__meta"><span>光耦</span><span>onsemi</span></div>
+          <h3>FOD814</h3>
+          <p>光晶体管输出光耦合器，两颗红外 LED 反向并联，4-pin DIP；适合 AC 电源监测与传感接口。</p>
+          <a class="link-arrow" href="https://rocelec.widen.net/view/pdf/pnkt74b9fs/FAIR-S-A0002258236-1.pdf?t.download=true&u=5oefqw" target="_blank" rel="noopener">下载规格书</a>
+        </article>
+        <article class="rl-feat__item reveal" style="--d:300ms">
+          <div class="rl-feat__meta"><span>没有列出？</span><span>LTG</span></div>
+          <h3>找不到你要的料号？</h3>
+          <p>Rochester 还有 20 万个料号没放上来。把型号、数量与需求日寄给我们，两个工作日内回复现货、替代料与交期。</p>
+          <a class="link-arrow" href="contact.html">业务咨询</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--dark">
+    <div class="wrap rl-about">
+      <div>
+        <h2 class="h-lg reveal">原厂停产之后，<br>还有人继续制造。</h2>
+      </div>
+      <div class="rl-about__body reveal" style="--d:80ms">
+        <p>Rochester Electronics 是半导体长生命周期方案的原厂：100% 由 70 家以上半导体制造商授权，现货超过 150 亿颗、涵盖 20 万个料号，并持续为 20,000 种以上器件提供制造。</p>
+        <p>手上还有 120 亿颗晶粒，代表 70,000 种以上的器件可以重新投产；从设计、封装、电性与可靠度测试到分析服务，都在同一条产线上完成。对军工、航空航天、医疗与长期维修的项目，这代表停产不等于断料。</p>
+        <dl class="rl-about__facts">
+          <div><dt>15B+</dt><dd>现货颗数</dd></div>
+          <div><dt>200k</dt><dd>可查料号</dd></div>
+          <div><dt>20k+</dt><dd>可制造器件</dd></div>
+          <div><dt>12B</dt><dd>晶粒库存</dd></div>
+        </dl>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="rl-band">
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="硅晶圆边缘的虹彩绕射光" style="background-image:url('../images/band-wafer.jpg')"></div>
+          <figcaption>晶圆：长生命周期器件的起点</figcaption>
+        </figure>
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="传感器芯片与金色打线微距" style="background-image:url('../images/band-die.jpg')"></div>
+          <figcaption>封装与打线：重新制造的关键工序</figcaption>
+        </figure>
+        <figure>
+          <div class="rl-band__img" role="img" aria-label="无线通信模块电路板微距" style="background-image:url('../images/band-module.jpg')"></div>
+          <figcaption>模块：从芯片到系统的最后一哩</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="wrap cta__inner">
+      <div>
+        <h2>查到现货，<br>下一步是把交期谈定。</h2>
+        <p>把料号、数量与需求日一起寄来，我们回你正式报价、交期与替代料建议。</p>
+      </div>
+      <div class="cta__actions">
+        <a class="btn" href="contact.html">业务咨询
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 7h11M8 2.5 12.5 7 8 11.5" stroke="currentColor" stroke-width="1.2"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="brands.html">回产品线</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a class="brand" href="index.html" aria-label="隆电 LTG 首页">
+          <img class="brand__logo" src="../assets/logo-ltg-light.png" alt="隆电 LTG" width="280" height="70">
+        </a>
+        <p>电子元器件代理。以工程支持与供应链纪律，让设计如期落地。</p>
+      </div>
+      <div class="footer__col">
+        <h4>导航</h4>
+        <ul>
+          <li><a href="index.html">首页</a></li>
+          <li><a href="brands.html">产品线</a></li>
+          <li><a href="about.html">关于隆电</a></li>
+          <li><a href="contact.html">联系我们</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>产品线</h4>
+        <ul>
+          <li><a href="brands.html#wireless">无线通信与 IoT</a></li>
+          <li><a href="brands.html#sensing">传感、功率与模拟</a></li>
+          <li><a href="brands.html#battery">电池与电源</a></li>
+          <li><a href="brands.html#longevity">长生命周期料件</a></li>
+          <li><a href="rochester.html">Rochester 现货查询</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>联系</h4>
+        <ul>
+          <li>台北市内湖区内湖路一段 250 号 11 楼</li>
+          <li><a href="tel:+886226275966">+886 2 2627 5966</a></li>
+          <li><a href="mailto:service@longtrump.com.tw">service@longtrump.com.tw</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 隆电股份有限公司 LTG. All rights reserved.</span>
+      <span>ISO 9001:2015 认证</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/rochester.js"></script>
+</body>
+</html>
